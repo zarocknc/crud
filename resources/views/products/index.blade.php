@@ -7,16 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
+    @livewireStyles
+    <script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 
 <body>
     <h1 class="text-3xl underline"> Esto es products.index</h1>
     <h2>Formulario para agregar Producto</h2>
 
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
     <label for="my-modal" class="btn">Agregar Producto</label>
 
-
-
+    @livewire('show-productos')
 
     <!-- MODAL CONTENT -->
     <input type="checkbox" id="my-modal" class="modal-toggle" />
@@ -33,6 +40,9 @@
             </div>
             <h3 class="font-bold text-lg">Agregar Producto</h3>
 
+
+
+
             <form action="{{ route('products.store') }}" method="POST">
                 @csrf
                 <input class="input input-bordered" type="text" name="pName" placeholder="Nombre" required>
@@ -45,7 +55,8 @@
                     @endforeach
                 </select>
 
-                <button type="button" onclick="window.location='{{ route('categorias.index') }}'" class="btn gap-2 btn-sm">
+                <button type="button" onclick="window.location='{{ route('categorias.index') }}'"
+                    class="btn gap-2 btn-sm">
                     <x-heroicon-o-plus-circle class="w-6 h-6" />
                     Categoria
                 </button>
@@ -54,7 +65,7 @@
 
                 <label class="input-group">
                     <span>Stock</span>
-                    <input type="number" placeholder="1" class="input input-bordered" />
+                    <input required name="pStock" type="number" placeholder="1" class="input input-bordered" />
                 </label>
 
                 <div class="form-control">
@@ -62,7 +73,7 @@
                         <span class="label-text">Precio</span>
                     </label>
                     <label class="input-group">
-                        <input type="text" placeholder="0.01" class="input input-bordered" />
+                        <input name="pPrice" type="text" placeholder="0.01" class="input input-bordered" />
                         <span>PEN</span>
                     </label>
                 </div>
@@ -74,6 +85,12 @@
 
         </div>
     </div>
+    @livewireScripts
+    <script>
+        setTimeout(() => {
+            $('.alert').fadeOut('fast');
+        }, 4000);
+    </script>
 </body>
 
 </html>

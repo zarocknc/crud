@@ -11,6 +11,7 @@
             </button>
         </div>
     </div>
+    <br>
     <div class="overflow-x-auto w-full">
         <table class="table w-full">
             <!--thead -->

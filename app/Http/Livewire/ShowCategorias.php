@@ -25,7 +25,7 @@ class ShowCategorias extends Component
         }
     }
     public function editar($id) {
-        //TODO: AQUI LA CSM 
-        return route("categorias.index");
+        $categoria = Categoria::find($id);
+        return redirect()->route("categorias.edit",["categoria" => $categoria]); //agregar parametro $categoria
     }
 }
